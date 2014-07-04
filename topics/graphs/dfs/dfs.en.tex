@@ -1,0 +1,148 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T2A]{fontenc}
+\usepackage[russian,english]{babel}
+
+\usepackage{fullpage}
+\usepackage{graphicx}
+
+\pagestyle{empty}
+
+\begin{document}
+  \section{Depth-first Search}
+
+    \subsection{Concepts and Algorithm}
+
+      \subsubsection{Graph Search (Traversal)}
+
+      \emph{Graph traversal} is a list of its vertices and edges
+      and an algorithm, that yields this list.
+
+      \subsubsection{Basic Algorithm}
+
+      \emph{Depth-first search} is defined as follows:
+      \begin{enumerate}
+        \item Consider a vertex $v$ that was not visited before
+        \item Mark $v$ as visited
+        \item Find edges $e: v \to u$ coming from $v$,
+          run depth-first search from all $u$
+      \end{enumerate}
+
+      It's easy to see that the algorithm visits all vertices,
+      that have a path to it from source vertex.
+
+      This algorithm is widely run from all non-visited vertices
+      sequentially. So the traversal will contain all vertices,
+      ignoring the connectivity.
+
+      \subsubsection{Visit Marks}
+
+      For every vertiex the algorithm needs to rememnber if it is
+      visited. One usually writes this information to a boolean array:
+      for vertex $v$ one stores $visited[v]$, initially $false$.
+      As we'll see, for every vertex it's useful to store some other
+      data.
+
+      \subsubsection{Traversal Tree}
+
+      The algorithm visits every vertex no more than once, because as
+      soon as it happens, the vertex will be marked visited.
+      So the visited vertices form a tree, rooted at the source vertex.
+
+      To build the tree implicitly, one can remember its parent at
+      the start of the recursive call.
+
+      \subsubsection{Edges Classes}
+
+      One can classify edges based on the traversal.
+
+      \begin{enumerate}
+        \item \emph{Tree edges} are the edges connecting each vertex
+          to its parent in the traversal tree. These are the edges
+          used by the algorithm to find new vertices.
+        \item \emph{Back edges} are the edges from vertices to their
+          ancestors in the tree.
+        \item \emph{Forward edges} are the edges from vertices to
+          their descendants.
+        \item \emph{Cross Edges} are all edge not classified before.
+      \end{enumerate}
+
+      \begin{itemize}
+        \item For a directed graph, every back edge corresponds to
+          a simple cycle.
+
+        \item For an undirected graph:
+          \begin{enumerate}
+            \item There are no cross edges (prove it).
+            \item Every forward edge $u \to v$ is also a back edge $v \to u$
+            \item Every back edge $u \to v$ is also either
+              forward edge $v \to u$ or tree edge $v \to u$.
+          \end{enumerate}
+      \end{itemize}
+
+      \subsubsection{Inbound And Outbound Times}
+
+      One can also add timestamps: record the order of start and end
+      of vertex processing. Commonly sequential integers are used.
+      Let's define inbound time as $t^{in}_v$ and outbound time as
+      $t^{out}_v$.
+
+      Note that these times form a bracket sequence:
+      \begin{itemize}
+        \item $t^{in}_v < t^{in}_u < t^{out}_u < t^{out}_v$, if vertex
+          $v$ is an ancestor of $u$,
+        \item $t^{in}_u < t^{in}_v < t^{out}_v < t^{out}_u$, if vertex
+          $v$ is a descendant of $u$,
+        \item $t^{in}_v < t^{out}_v < t^{in}_u < t^{out}_u$ or
+          $t^{in}_u < t^{out}_u < t^{in}_v < t^{out}_v$ otherwise.
+      \end{itemize}
+
+      \subsubsection{Three Colors}
+
+      One can use a more complicated marking system. One of them is
+      commonly described as three colors system.
+
+      Initially all vertices are white: the processing is not started.
+      Immediately after the start of processing the vertex is marked
+      gray. At the end of processing it is marked black.
+
+      It is a nice way to find back edges: these are the only edges
+      from gray vertex to another gray vertex. Tree edges connect
+      gray vertices to white, all other edges connect gray to black.
+
+      \subsubsection{* Implementation Notes For Trees}
+
+      Consider the depth-first search over a tree. The only edges
+      not in the traversal tree are the corresponding back edges.
+      The statement above holds for an undirected tree. It also
+      allows not to store visit marks. To avoid infinite recursive
+      calls, it's enough not to allow going from a vertex to its parent.
+
+    \subsection{Applications}
+
+      \subsubsection{Checking For A Ancestor}
+
+      \subsubsection{Connected Components}
+      
+      \subsubsection{Cycles}
+      
+      \subsubsection{Topological Sorting}
+
+      \subsubsection{Two-Color Coloring}
+
+      \subsubsection{Strongly Connected Components}
+
+      \subsubsection{Bridges}
+
+      \subsubsection{Cut Vertices}
+
+      \subsubsection{Biconnected Components}
+
+      \subsubsection{* Eulerian Cycle}
+
+      \subsubsection{* Maximal Matching In A Bipartite Graph}
+
+      \subsubsection{* Least Common Ancestor}
+
+\end{document}
