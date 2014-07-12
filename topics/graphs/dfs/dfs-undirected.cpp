@@ -126,7 +126,7 @@ struct graph {
           popE (ce.id);
         } else if (p == -1 && treeEdges > 1) {
           if (debug) {
-            printf ("Root %d has more than one tree children, "
+            printf ("Root %d has more than one tree child, "
               "will be a cut point\n", v);
           }
           popE (ce.id);
@@ -164,8 +164,8 @@ struct graph {
     mark[v] = markBlack;
     tOut[v] = curTime++;
     if (debug) {
-      printf ("DFS: processing vertex %d finished (out time %d), "
-        "marked as black\n", v, tOut[v]);
+      printf ("DFS: processing vertex %d finished (out time %d),"
+        " marked as black\n", v, tOut[v]);
     }
   }
 
@@ -189,60 +189,4 @@ struct graph {
       printf ("runDFS finished\n");
     }
   }
-
-  void dumpBridges () {
-    sort (bridges.begin (), bridges.end ());
-    int count = (int)bridges.size ();
-    printf ("%d\n", count);
-    for (int i = 0; i < count; ++i) {
-      printf ("%d\n", bridges[i] + 1);
-    }
-  }
-
-  void dumpCutPoints () {
-    sort (cutPoints.begin (), cutPoints.end ());
-    int count = (int)cutPoints.size ();
-    printf ("%d\n", count);
-    for (int i = 0; i < count; ++i) {
-      printf ("%d\n", cutPoints[i] + 1);
-    }
-  }
-
-  void dumpBiCompE () {
-    vector <int> color (nV, -1);
-    for (int i = 0; i < (int)biCompE.size (); ++i) {
-      for (int j : biCompE[i]) {
-        color[j] = i;
-      }
-    }
-    printf ("%d\n", (int)biCompE.size ());
-    for (int i = 0; i < nV; ++i) {
-      printf ("%d%c", color[i] + 1, " \n"[i + 1 == nV]);
-    }
-  }
-
-  void dumpBiCompV () {
-    vector <int> color (nE, -1);
-    for (int i = 0; i < (int)biCompV.size (); ++i) {
-      for (int j : biCompV[i]) {
-        color[j] = i;
-      }
-    }
-    printf ("%d\n", (int)biCompV.size ());
-    for (int i = 0; i < nE; ++i) {
-      printf ("%d%c", color[i] + 1, " \n"[i + 1 == nE]);
-    }
-  }
 };
-
-int main (void) {
-  graph g;
-  g.debug = true;
-  g.read ();
-  g.runDFS ();
-  g.dumpBridges ();
-  g.dumpBiCompE ();
-  g.dumpCutPoints ();
-  g.dumpBiCompV ();
-  return 0;
-}

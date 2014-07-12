@@ -1,0 +1,194 @@
+%\noindent
+\texttt{\newline{\color[rgb]{0.8,0.8,0.8}}{\color[rgb]{0.0,0.5,0.0}\#include <{}cstdio>{}}\newline
+{\color[rgb]{0.8,0.8,0.8}}{\color[rgb]{0.0,0.5,0.0}\#include <{}cassert>{}}\newline
+{\color[rgb]{0.8,0.8,0.8}}{\color[rgb]{0.0,0.5,0.0}\#include <{}vector>{}}\newline
+{\color[rgb]{0.8,0.8,0.8}}{\color[rgb]{0.0,0.5,0.0}\#include <{}algorithm>{}}\newline
+{\color[rgb]{0.8,0.8,0.8}}\newline
+{\color[rgb]{0.8,0.8,0.8}}{\color[rgb]{0.4,0.4,0.0}using} {\color[rgb]{0.4,0.4,0.0}namespace} std;\newline
+{\color[rgb]{0.8,0.8,0.8}}\newline
+{\color[rgb]{0.8,0.8,0.8}}{\color[rgb]{0.4,0.4,0.0}struct} edge \{\newline
+{\color[rgb]{0.8,0.8,0.8}| }{\color[rgb]{0.5,0.0,0.0}int} to, id;\newline
+{\color[rgb]{0.8,0.8,0.8}| }\newline
+{\color[rgb]{0.8,0.8,0.8}| }edge ({\color[rgb]{0.5,0.0,0.0}int} \_to, {\color[rgb]{0.5,0.0,0.0}int} \_id):\newline
+{\color[rgb]{0.8,0.8,0.8}| | }to(\_to), id(\_id) \{\newline
+{\color[rgb]{0.8,0.8,0.8}| }\}\newline
+{\color[rgb]{0.8,0.8,0.8}}\};\newline
+{\color[rgb]{0.8,0.8,0.8}}\newline
+{\color[rgb]{0.8,0.8,0.8}}{\color[rgb]{0.4,0.4,0.0}struct} graph \{\newline
+{\color[rgb]{0.8,0.8,0.8}| }{\color[rgb]{0.5,0.0,0.0}bool} debug;\newline
+{\color[rgb]{0.8,0.8,0.8}}\newline
+{\color[rgb]{0.8,0.8,0.8}| }{\color[rgb]{0.5,0.0,0.0}int} nV, nE;\newline
+{\color[rgb]{0.8,0.8,0.8}| }vector <{}vector <{}edge>{} >{} e;\newline
+{\color[rgb]{0.8,0.8,0.8}}\newline
+{\color[rgb]{0.8,0.8,0.8}| }{\color[rgb]{0.5,0.0,0.0}int} curTime;\newline
+{\color[rgb]{0.8,0.8,0.8}| }vector <{}{\color[rgb]{0.5,0.0,0.0}int}>{} mark;\newline
+{\color[rgb]{0.8,0.8,0.8}| }vector <{}{\color[rgb]{0.5,0.0,0.0}int}>{} tIn, tOut;\newline
+{\color[rgb]{0.8,0.8,0.8}| }vector <{}{\color[rgb]{0.5,0.0,0.0}int}>{} l;\newline
+{\color[rgb]{0.8,0.8,0.8}| }vector <{}{\color[rgb]{0.5,0.0,0.0}int}>{} stV, stE;\newline
+{\color[rgb]{0.8,0.8,0.8}}\newline
+{\color[rgb]{0.8,0.8,0.8}| }{\color[rgb]{0.4,0.4,0.0}static} {\color[rgb]{0.4,0.4,0.0}const} {\color[rgb]{0.5,0.0,0.0}int} markWhite = {\color[rgb]{0.0,0.0,0.5}0};\newline
+{\color[rgb]{0.8,0.8,0.8}| }{\color[rgb]{0.4,0.4,0.0}static} {\color[rgb]{0.4,0.4,0.0}const} {\color[rgb]{0.5,0.0,0.0}int} markGray = {\color[rgb]{0.0,0.0,0.5}1};\newline
+{\color[rgb]{0.8,0.8,0.8}| }{\color[rgb]{0.4,0.4,0.0}static} {\color[rgb]{0.4,0.4,0.0}const} {\color[rgb]{0.5,0.0,0.0}int} markBlack = {\color[rgb]{0.0,0.0,0.5}2};\newline
+{\color[rgb]{0.8,0.8,0.8}}\newline
+{\color[rgb]{0.8,0.8,0.8}| }vector <{}{\color[rgb]{0.5,0.0,0.0}int}>{} bridges;\newline
+{\color[rgb]{0.8,0.8,0.8}| }vector <{}{\color[rgb]{0.5,0.0,0.0}int}>{} cutPoints;\newline
+{\color[rgb]{0.8,0.8,0.8}| }vector <{}vector <{}{\color[rgb]{0.5,0.0,0.0}int}>{} >{} biCompE;\newline
+{\color[rgb]{0.8,0.8,0.8}| }vector <{}vector <{}{\color[rgb]{0.5,0.0,0.0}int}>{} >{} biCompV;\newline
+{\color[rgb]{0.8,0.8,0.8}}\newline
+{\color[rgb]{0.8,0.8,0.8}| }graph () \{\newline
+{\color[rgb]{0.8,0.8,0.8}| | }nV = {-}{\color[rgb]{0.0,0.0,0.5}1};\newline
+{\color[rgb]{0.8,0.8,0.8}| | }nE = {-}{\color[rgb]{0.0,0.0,0.5}1};\newline
+{\color[rgb]{0.8,0.8,0.8}| | }debug = {\color[rgb]{0.4,0.4,0.0}false};\newline
+{\color[rgb]{0.8,0.8,0.8}| }\}\newline
+{\color[rgb]{0.8,0.8,0.8}}\newline
+{\color[rgb]{0.8,0.8,0.8}| }{\color[rgb]{0.5,0.0,0.0}void} read () \{\newline
+{\color[rgb]{0.8,0.8,0.8}| | }assert (scanf ({\color[rgb]{0.5,0.0,0.0}"\%d\%d\textquotedbl}, \&nV, \&nE) == {\color[rgb]{0.0,0.0,0.5}2});\newline
+{\color[rgb]{0.8,0.8,0.8}| | }assert (nV >{}= {\color[rgb]{0.0,0.0,0.5}1});\newline
+{\color[rgb]{0.8,0.8,0.8}| | }assert (nE >{}= {\color[rgb]{0.0,0.0,0.5}0});\newline
+{\color[rgb]{0.8,0.8,0.8}| | }e.resize (nV);\newline
+{\color[rgb]{0.8,0.8,0.8}| | }{\color[rgb]{0.4,0.4,0.0}for} ({\color[rgb]{0.5,0.0,0.0}int} i = {\color[rgb]{0.0,0.0,0.5}0}; i <{} nE; ++i) \{\newline
+{\color[rgb]{0.8,0.8,0.8}| | | }{\color[rgb]{0.5,0.0,0.0}int} a, b;\newline
+{\color[rgb]{0.8,0.8,0.8}| | | }assert (scanf ({\color[rgb]{0.5,0.0,0.0}"\%d\%d\textquotedbl}, \&a, \&b) == {\color[rgb]{0.0,0.0,0.5}2});\newline
+{\color[rgb]{0.8,0.8,0.8}| | | }{-}{-}a; {-}{-}b;\newline
+{\color[rgb]{0.8,0.8,0.8}| | | }e[a].push\_back (edge (b, i));\newline
+{\color[rgb]{0.8,0.8,0.8}| | | }e[b].push\_back (edge (a, i));\newline
+{\color[rgb]{0.8,0.8,0.8}| | }\}\newline
+{\color[rgb]{0.8,0.8,0.8}| | }mark = vector <{}{\color[rgb]{0.5,0.0,0.0}int}>{} (nV, markWhite);\newline
+{\color[rgb]{0.8,0.8,0.8}| | }tIn = vector <{}{\color[rgb]{0.5,0.0,0.0}int}>{} (nV, {-}{\color[rgb]{0.0,0.0,0.5}1});\newline
+{\color[rgb]{0.8,0.8,0.8}| | }tOut = vector <{}{\color[rgb]{0.5,0.0,0.0}int}>{} (nV, {-}{\color[rgb]{0.0,0.0,0.5}1});\newline
+{\color[rgb]{0.8,0.8,0.8}| | }l = vector <{}{\color[rgb]{0.5,0.0,0.0}int}>{} (nV, {-}{\color[rgb]{0.0,0.0,0.5}1});\newline
+{\color[rgb]{0.8,0.8,0.8}| }\}\newline
+{\color[rgb]{0.8,0.8,0.8}}\newline
+{\color[rgb]{0.8,0.8,0.8}| }{\color[rgb]{0.5,0.0,0.0}void} popV ({\color[rgb]{0.5,0.0,0.0}int} v = {-}{\color[rgb]{0.0,0.0,0.5}1}) \{\newline
+{\color[rgb]{0.8,0.8,0.8}| | }vector <{}{\color[rgb]{0.5,0.0,0.0}int}>{} comp;\newline
+{\color[rgb]{0.8,0.8,0.8}| | }{\color[rgb]{0.5,0.0,0.0}int} x;\newline
+{\color[rgb]{0.8,0.8,0.8}| | }{\color[rgb]{0.4,0.4,0.0}do} \{\newline
+{\color[rgb]{0.8,0.8,0.8}| | | }x = stV[({\color[rgb]{0.5,0.0,0.0}int})stV.size () {-} {\color[rgb]{0.0,0.0,0.5}1}];\newline
+{\color[rgb]{0.8,0.8,0.8}| | | }stV.pop\_back ();\newline
+{\color[rgb]{0.8,0.8,0.8}| | | }comp.push\_back (x);\newline
+{\color[rgb]{0.8,0.8,0.8}| | }\} {\color[rgb]{0.4,0.4,0.0}while} (({\color[rgb]{0.5,0.0,0.0}int})stV.size () >{} {\color[rgb]{0.0,0.0,0.5}0} \&\& x != v);\newline
+{\color[rgb]{0.8,0.8,0.8}| | }biCompE.push\_back (comp);\newline
+{\color[rgb]{0.8,0.8,0.8}| }\}\newline
+{\color[rgb]{0.8,0.8,0.8}}\newline
+{\color[rgb]{0.8,0.8,0.8}| }{\color[rgb]{0.5,0.0,0.0}void} popE ({\color[rgb]{0.5,0.0,0.0}int} e = {-}{\color[rgb]{0.0,0.0,0.5}1}) \{\newline
+{\color[rgb]{0.8,0.8,0.8}| | }{\color[rgb]{0.4,0.4,0.0}if} (({\color[rgb]{0.5,0.0,0.0}int})stE.size () == {\color[rgb]{0.0,0.0,0.5}0}) \{\newline
+{\color[rgb]{0.8,0.8,0.8}| | | }{\color[rgb]{0.4,0.4,0.0}return};\newline
+{\color[rgb]{0.8,0.8,0.8}| | }\}\newline
+{\color[rgb]{0.8,0.8,0.8}| | }vector <{}{\color[rgb]{0.5,0.0,0.0}int}>{} comp;\newline
+{\color[rgb]{0.8,0.8,0.8}| | }{\color[rgb]{0.5,0.0,0.0}int} x;\newline
+{\color[rgb]{0.8,0.8,0.8}| | }{\color[rgb]{0.4,0.4,0.0}do} \{\newline
+{\color[rgb]{0.8,0.8,0.8}| | | }x = stE[({\color[rgb]{0.5,0.0,0.0}int})stE.size () {-} {\color[rgb]{0.0,0.0,0.5}1}];\newline
+{\color[rgb]{0.8,0.8,0.8}| | | }stE.pop\_back ();\newline
+{\color[rgb]{0.8,0.8,0.8}| | | }comp.push\_back (x);\newline
+{\color[rgb]{0.8,0.8,0.8}| | }\} {\color[rgb]{0.4,0.4,0.0}while} (({\color[rgb]{0.5,0.0,0.0}int})stE.size () >{} {\color[rgb]{0.0,0.0,0.5}0} \&\& x != e);\newline
+{\color[rgb]{0.8,0.8,0.8}| | }biCompV.push\_back (comp);\newline
+{\color[rgb]{0.8,0.8,0.8}| }\}\newline
+{\color[rgb]{0.8,0.8,0.8}}\newline
+{\color[rgb]{0.8,0.8,0.8}| }{\color[rgb]{0.5,0.0,0.0}void} DFS ({\color[rgb]{0.5,0.0,0.0}int} v, {\color[rgb]{0.5,0.0,0.0}int} p = {-}{\color[rgb]{0.0,0.0,0.5}1}, {\color[rgb]{0.5,0.0,0.0}int} pe = {-}{\color[rgb]{0.0,0.0,0.5}1}) \{\newline
+{\color[rgb]{0.8,0.8,0.8}| | }tIn[v] = curTime++;\newline
+{\color[rgb]{0.8,0.8,0.8}| | }mark[v] = markGray;\newline
+{\color[rgb]{0.8,0.8,0.8}| | }l[v] = tIn[v];\newline
+{\color[rgb]{0.8,0.8,0.8}| | }{\color[rgb]{0.5,0.0,0.0}bool} isCut = {\color[rgb]{0.4,0.4,0.0}false};\newline
+{\color[rgb]{0.8,0.8,0.8}| | }{\color[rgb]{0.5,0.0,0.0}int} treeEdges = {\color[rgb]{0.0,0.0,0.5}0};\newline
+{\color[rgb]{0.8,0.8,0.8}| | }stV.push\_back (v);\newline
+{\color[rgb]{0.8,0.8,0.8}| | }{\color[rgb]{0.4,0.4,0.0}if} (pe != {-}{\color[rgb]{0.0,0.0,0.5}1}) \{\newline
+{\color[rgb]{0.8,0.8,0.8}| | | }stE.push\_back (pe);\newline
+{\color[rgb]{0.8,0.8,0.8}| | }\}\newline
+{\color[rgb]{0.8,0.8,0.8}| | }{\color[rgb]{0.4,0.4,0.0}if} (debug) \{\newline
+{\color[rgb]{0.8,0.8,0.8}| | | }printf ({\color[rgb]{0.5,0.0,0.0}"DFS: processing vertex \%d \textquotedbl}\newline
+{\color[rgb]{0.8,0.8,0.8}| | | | }{\color[rgb]{0.5,0.0,0.0}"(parent vertex \%d, parent edge \%d, \textquotedbl}\newline
+{\color[rgb]{0.8,0.8,0.8}| | | | }{\color[rgb]{0.5,0.0,0.0}"in time \%d), marked as gray$\backslash$n\textquotedbl}, v, p, pe, tIn[v]);\newline
+{\color[rgb]{0.8,0.8,0.8}| | }\}\newline
+{\color[rgb]{0.8,0.8,0.8}}\newline
+{\color[rgb]{0.8,0.8,0.8}| | }{\color[rgb]{0.4,0.4,0.0}for} ({\color[rgb]{0.5,0.0,0.0}int} i = {\color[rgb]{0.0,0.0,0.5}0}; i <{} ({\color[rgb]{0.5,0.0,0.0}int})e[v].size (); ++i) \{\newline
+{\color[rgb]{0.8,0.8,0.8}| | | }edge \&ce = e[v][i];\newline
+{\color[rgb]{0.8,0.8,0.8}| | | }{\color[rgb]{0.4,0.4,0.0}if} (ce.id == pe) \{\newline
+{\color[rgb]{0.8,0.8,0.8}| | | | }{\color[rgb]{0.4,0.4,0.0}if} (debug) \{\newline
+{\color[rgb]{0.8,0.8,0.8}| | | | | }printf ({\color[rgb]{0.5,0.0,0.0}"Found reverse of parent edge, ignore it$\backslash$n\textquotedbl});\newline
+{\color[rgb]{0.8,0.8,0.8}| | | | }\}\newline
+{\color[rgb]{0.8,0.8,0.8}| | | | }{\color[rgb]{0.4,0.4,0.0}continue};\newline
+{\color[rgb]{0.8,0.8,0.8}| | | }\}\newline
+{\color[rgb]{0.8,0.8,0.8}| | | }{\color[rgb]{0.4,0.4,0.0}if} (mark[ce.to] == markWhite) \{\newline
+{\color[rgb]{0.8,0.8,0.8}| | | | }{\color[rgb]{0.4,0.4,0.0}if} (debug) \{\newline
+{\color[rgb]{0.8,0.8,0.8}| | | | | }printf ({\color[rgb]{0.5,0.0,0.0}"Found white vertex \%d, tree edge$\backslash$n\textquotedbl}, ce.to);\newline
+{\color[rgb]{0.8,0.8,0.8}| | | | }\}\newline
+{\color[rgb]{0.8,0.8,0.8}| | | | }DFS (ce.to, v, ce.id);\newline
+{\color[rgb]{0.8,0.8,0.8}| | | | }l[v] = min (l[v], l[ce.to]);\newline
+{\color[rgb]{0.8,0.8,0.8}| | | | }{\color[rgb]{0.4,0.4,0.0}if} (debug) \{\newline
+{\color[rgb]{0.8,0.8,0.8}| | | | | }printf ({\color[rgb]{0.5,0.0,0.0}"Relax l[\%d]: new value \%d$\backslash$n\textquotedbl}, v, l[v]);\newline
+{\color[rgb]{0.8,0.8,0.8}| | | | }\}\newline
+{\color[rgb]{0.8,0.8,0.8}| | | | }++treeEdges;\newline
+{\color[rgb]{0.8,0.8,0.8}| | | | }{\color[rgb]{0.4,0.4,0.0}if} (p != {-}{\color[rgb]{0.0,0.0,0.5}1} \&\& l[ce.to] >{} tIn[p]) \{\newline
+{\color[rgb]{0.8,0.8,0.8}| | | | | }{\color[rgb]{0.4,0.4,0.0}if} (debug) \{\newline
+{\color[rgb]{0.8,0.8,0.8}| | | | | | }printf ({\color[rgb]{0.5,0.0,0.0}"Subtree starting at \%d will fall off, \textquotedbl}\newline
+{\color[rgb]{0.8,0.8,0.8}| | | | | | | }{\color[rgb]{0.5,0.0,0.0}"\%d will be a cut point$\backslash$n\textquotedbl}, ce.to, v);\newline
+{\color[rgb]{0.8,0.8,0.8}| | | | | }\}\newline
+{\color[rgb]{0.8,0.8,0.8}| | | | | }isCut = {\color[rgb]{0.4,0.4,0.0}true};\newline
+{\color[rgb]{0.8,0.8,0.8}| | | | | }popE (ce.id);\newline
+{\color[rgb]{0.8,0.8,0.8}| | | | }\} {\color[rgb]{0.4,0.4,0.0}else} {\color[rgb]{0.4,0.4,0.0}if} (p == {-}{\color[rgb]{0.0,0.0,0.5}1} \&\& treeEdges >{} {\color[rgb]{0.0,0.0,0.5}1}) \{\newline
+{\color[rgb]{0.8,0.8,0.8}| | | | | }{\color[rgb]{0.4,0.4,0.0}if} (debug) \{\newline
+{\color[rgb]{0.8,0.8,0.8}| | | | | | }printf ({\color[rgb]{0.5,0.0,0.0}"Root \%d has more than one tree child, \textquotedbl}\newline
+{\color[rgb]{0.8,0.8,0.8}| | | | | | | }{\color[rgb]{0.5,0.0,0.0}"will be a cut point$\backslash$n\textquotedbl}, v);\newline
+{\color[rgb]{0.8,0.8,0.8}| | | | | }\}\newline
+{\color[rgb]{0.8,0.8,0.8}| | | | | }popE (ce.id);\newline
+{\color[rgb]{0.8,0.8,0.8}| | | | }\}\newline
+{\color[rgb]{0.8,0.8,0.8}| | | }\} {\color[rgb]{0.4,0.4,0.0}else} {\color[rgb]{0.4,0.4,0.0}if} (mark[ce.to] == markGray) \{\newline
+{\color[rgb]{0.8,0.8,0.8}| | | | }{\color[rgb]{0.4,0.4,0.0}if} (debug) \{\newline
+{\color[rgb]{0.8,0.8,0.8}| | | | | }printf ({\color[rgb]{0.5,0.0,0.0}"Found gray vertex \%d, back edge$\backslash$n\textquotedbl}, ce.to);\newline
+{\color[rgb]{0.8,0.8,0.8}| | | | }\}\newline
+{\color[rgb]{0.8,0.8,0.8}| | | | }l[v] = min (l[v], tIn[ce.to]);\newline
+{\color[rgb]{0.8,0.8,0.8}| | | | }{\color[rgb]{0.4,0.4,0.0}if} (debug) \{\newline
+{\color[rgb]{0.8,0.8,0.8}| | | | | }printf ({\color[rgb]{0.5,0.0,0.0}"Relax l[\%d]: new value \%d$\backslash$n\textquotedbl}, v, l[v]);\newline
+{\color[rgb]{0.8,0.8,0.8}| | | | }\}\newline
+{\color[rgb]{0.8,0.8,0.8}| | | | }stE.push\_back (ce.id);\newline
+{\color[rgb]{0.8,0.8,0.8}| | | }\} {\color[rgb]{0.4,0.4,0.0}else} {\color[rgb]{0.4,0.4,0.0}if} (mark[ce.to] == markBlack) \{\newline
+{\color[rgb]{0.8,0.8,0.8}| | | | }{\color[rgb]{0.4,0.4,0.0}if} (debug) \{\newline
+{\color[rgb]{0.8,0.8,0.8}| | | | | }printf ({\color[rgb]{0.5,0.0,0.0}"Found black vertex \%d, forward edge$\backslash$n\textquotedbl}, ce.to);\newline
+{\color[rgb]{0.8,0.8,0.8}| | | | }\}\newline
+{\color[rgb]{0.8,0.8,0.8}| | | }\}\newline
+{\color[rgb]{0.8,0.8,0.8}| | }\}\newline
+{\color[rgb]{0.8,0.8,0.8}}\newline
+{\color[rgb]{0.8,0.8,0.8}| | }{\color[rgb]{0.4,0.4,0.0}if} (p != {-}{\color[rgb]{0.0,0.0,0.5}1} \&\& l[v] >{} tIn[p]) \{\newline
+{\color[rgb]{0.8,0.8,0.8}| | | }{\color[rgb]{0.4,0.4,0.0}if} (debug) \{\newline
+{\color[rgb]{0.8,0.8,0.8}| | | | }printf ({\color[rgb]{0.5,0.0,0.0}"Found bridge \%d: \%d {-}{-} \%d$\backslash$n\textquotedbl}, pe, p, v);\newline
+{\color[rgb]{0.8,0.8,0.8}| | | }\}\newline
+{\color[rgb]{0.8,0.8,0.8}| | | }bridges.push\_back (pe);\newline
+{\color[rgb]{0.8,0.8,0.8}| | | }popV (v);\newline
+{\color[rgb]{0.8,0.8,0.8}| | }\}\newline
+{\color[rgb]{0.8,0.8,0.8}| | }{\color[rgb]{0.4,0.4,0.0}if} ((p != {-}{\color[rgb]{0.0,0.0,0.5}1} \&\& isCut) || (p == {-}{\color[rgb]{0.0,0.0,0.5}1} \&\& treeEdges >{} {\color[rgb]{0.0,0.0,0.5}1})) \{\newline
+{\color[rgb]{0.8,0.8,0.8}| | | }{\color[rgb]{0.4,0.4,0.0}if} (debug) \{\newline
+{\color[rgb]{0.8,0.8,0.8}| | | | }printf ({\color[rgb]{0.5,0.0,0.0}"Found cut point \%d$\backslash$n\textquotedbl}, v);\newline
+{\color[rgb]{0.8,0.8,0.8}| | | }\}\newline
+{\color[rgb]{0.8,0.8,0.8}| | | }cutPoints.push\_back (v);\newline
+{\color[rgb]{0.8,0.8,0.8}| | }\}\newline
+{\color[rgb]{0.8,0.8,0.8}}\newline
+{\color[rgb]{0.8,0.8,0.8}| | }mark[v] = markBlack;\newline
+{\color[rgb]{0.8,0.8,0.8}| | }tOut[v] = curTime++;\newline
+{\color[rgb]{0.8,0.8,0.8}| | }{\color[rgb]{0.4,0.4,0.0}if} (debug) \{\newline
+{\color[rgb]{0.8,0.8,0.8}| | | }printf ({\color[rgb]{0.5,0.0,0.0}"DFS: processing vertex \%d finished (out time \%d),\textquotedbl}\newline
+{\color[rgb]{0.8,0.8,0.8}| | | | }{\color[rgb]{0.5,0.0,0.0}" marked as black$\backslash$n\textquotedbl}, v, tOut[v]);\newline
+{\color[rgb]{0.8,0.8,0.8}| | }\}\newline
+{\color[rgb]{0.8,0.8,0.8}| }\}\newline
+{\color[rgb]{0.8,0.8,0.8}}\newline
+{\color[rgb]{0.8,0.8,0.8}| }{\color[rgb]{0.5,0.0,0.0}void} runDFS () \{\newline
+{\color[rgb]{0.8,0.8,0.8}| | }{\color[rgb]{0.4,0.4,0.0}if} (debug) \{\newline
+{\color[rgb]{0.8,0.8,0.8}| | | }printf ({\color[rgb]{0.5,0.0,0.0}"runDFS started$\backslash$n\textquotedbl});\newline
+{\color[rgb]{0.8,0.8,0.8}| | }\}\newline
+{\color[rgb]{0.8,0.8,0.8}| | }assert (nV != {-}{\color[rgb]{0.0,0.0,0.5}1});\newline
+{\color[rgb]{0.8,0.8,0.8}| | }curTime = {\color[rgb]{0.0,0.0,0.5}0};\newline
+{\color[rgb]{0.8,0.8,0.8}| | }{\color[rgb]{0.4,0.4,0.0}for} ({\color[rgb]{0.5,0.0,0.0}int} i = {\color[rgb]{0.0,0.0,0.5}0}; i <{} nV; ++i) \{\newline
+{\color[rgb]{0.8,0.8,0.8}| | | }{\color[rgb]{0.4,0.4,0.0}if} (mark[i] == markWhite) \{\newline
+{\color[rgb]{0.8,0.8,0.8}| | | | }{\color[rgb]{0.4,0.4,0.0}if} (debug) \{\newline
+{\color[rgb]{0.8,0.8,0.8}| | | | | }printf ({\color[rgb]{0.5,0.0,0.0}"run search from vertex \%d$\backslash$n\textquotedbl}, i);\newline
+{\color[rgb]{0.8,0.8,0.8}| | | | }\}\newline
+{\color[rgb]{0.8,0.8,0.8}| | | | }DFS (i);\newline
+{\color[rgb]{0.8,0.8,0.8}| | | | }popV ();\newline
+{\color[rgb]{0.8,0.8,0.8}| | | | }popE ();\newline
+{\color[rgb]{0.8,0.8,0.8}| | | }\}\newline
+{\color[rgb]{0.8,0.8,0.8}| | }\}\newline
+{\color[rgb]{0.8,0.8,0.8}| | }{\color[rgb]{0.4,0.4,0.0}if} (debug) \{\newline
+{\color[rgb]{0.8,0.8,0.8}| | | }printf ({\color[rgb]{0.5,0.0,0.0}"runDFS finished$\backslash$n\textquotedbl});\newline
+{\color[rgb]{0.8,0.8,0.8}| | }\}\newline
+{\color[rgb]{0.8,0.8,0.8}| }\}\newline
+{\color[rgb]{0.8,0.8,0.8}}\};\newline
+{\color[rgb]{0.8,0.8,0.8}}}

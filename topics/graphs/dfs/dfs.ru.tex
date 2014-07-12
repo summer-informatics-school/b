@@ -4,11 +4,15 @@
 \usepackage[T2A]{fontenc}
 \usepackage[english,russian]{babel}
 
-\usepackage{fullpage}
 \usepackage{graphicx}
+\usepackage{color}
 \usepackage{indentfirst}
+\usepackage{fancyhdr}
+\usepackage{needspace}
 
-\pagestyle{empty}
+\pagestyle{fancy}
+\lhead{Поиск в глубину}
+\rhead{ЛКШ.2014.Июль.B}
 
 \begin{document}
   \section{Поиск в глубину}
@@ -248,5 +252,11 @@
       Эта задача решается многими различными способами. Здесь рассмотрим
       алгоритм Тарьяна, основанный на поиске в глубину и системе
       непересекающихся множеств.
+
+    \subsection{Пример реализации}
+
+      \subsubsection{Реализация для неориентированного графа}
+
+        \input{dfs-undirected.tex}
 
 \end{document}
