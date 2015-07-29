@@ -1,0 +1,100 @@
+\documentclass[a4paper,10pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T2A]{fontenc}
+\usepackage[english,russian]{babel}
+
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{indentfirst}
+\usepackage{fancyhdr}
+\usepackage{needspace}
+\usepackage[margin=2cm]{geometry}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+
+\pagestyle{fancy}
+\lhead{Поиск в глубину}
+\rhead{ЛКШ.2015.Август.B.Тесты}
+
+\begin{document}
+  \section{Поиск в глубину: тест}
+
+  \begin{enumerate}
+    \item
+      Дан ориентированный граф. Запустите из вершины $3$ обход в глубину
+      (порядок перебора соседей на ваше усмотрение). Для каждого ребра на рисунке
+      определите, какому из следующих классов оно принадлежит: древесные (д), прямые (пр),
+      обратные (о), перекрёстные (пер).
+
+      \begin{center}
+        \begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2cm,
+          thick,main node/.style={circle,draw,font=\sffamily\Large\bfseries}]
+            \node[main node] (4) {4};
+            \node[main node] (3) [below right of=4] {3};
+            \node[main node] (1) [below of=3] {1};
+            \node[main node] (5) [below left of=4] {5};
+            \node[main node] (2) [below of=5] {2};
+            \node[main node] (6) [right of=3] {6};
+
+            \path[] (2) [bend right] edge node [] {} (1);
+            \path[] (5) [bend right] edge node [] {} (2);
+            \path[] (5) [bend left] edge node [] {} (4);
+            \path[] (4) [bend left] edge node [] {} (3);
+            \path[] (3) [bend left] edge node [] {} (5);
+            \path[] (3) [bend right] edge node [] {} (1);
+            \path[] (3) [bend left] edge node [] {} (6);
+            \path[] (6) [bend left] edge node [] {} (1);
+        \end{tikzpicture}
+      \end{center}
+
+    \item
+      В ориентированном графе происходит серия запусков поиска в глубину в порядке
+      возрастания номеров вершин. Для одной из вершин оказалось, что при запуске
+      \textbf{dfs} она оказалась единственной в этом дереве обхода, причем у нее
+      есть и входящие, и исходящие ребра. Нарисуйте пример такого графа и проставьте
+      в нем номера вершин.
+
+      \vskip 4cm
+
+    \item
+      К некоторому дереву применили алгоритм обхода в глубину и для каждой вершины
+      выписали времена входа ($t_{in}$) и выхода ($t_{out}$). Восстановите исходное дерево.
+      \begin{center}
+        \begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+          \hline
+          \# & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 \\
+          \hline
+          $t_{in}$ & 1 & 2 & 3 & 5 & 6 & 7 & 10 & 12 \\
+          \hline
+          $t_{out}$ & 16 & 15 & 4 & 14 & 9 & 8 & 11 & 13 \\
+          \hline
+        \end{tabular}
+      \end{center}
+
+      \vskip 4cm
+
+     \item
+       Каково максимальное (минимальное) количество мостов (точек сочленения)
+       может быть в графе из пяти вершин? Ответом являются четыре числа.
+      
+      \begin{center}
+        \begin{tabular}{|c|c|c|}
+          \hline
+           & Минимальное & Максимальное \\
+          \hline
+          Мосты & & \\
+          \hline
+          Точки сочленения & & \\
+          \hline
+        \end{tabular}
+      \end{center}
+
+     \item
+       Ученик группы B0 считает, что алгоритм определения компонент сильной связности
+       можно упростить, если во втором поиске в глубину использовать исходный,
+       а не транспонированный граф, и сканировать вершины в порядке возрастания времен
+       выхода. Будет ли такой алгоритм всегда корректен?
+
+  \end{enumerate}
+\end{document}
