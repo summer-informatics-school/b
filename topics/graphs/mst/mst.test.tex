@@ -1,0 +1,109 @@
+\documentclass[a4paper,10pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T2A]{fontenc}
+\usepackage[english,russian]{babel}
+
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{indentfirst}
+\usepackage{fancyhdr}
+\usepackage{needspace}
+\usepackage[margin=2cm]{geometry}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+
+\pagestyle{fancy}
+\lhead{Остовы}
+\rhead{ЛКШ.2015.Август.B.Тесты}
+
+\begin{document}
+  \section{Остовы: тест}
+
+  \begin{enumerate}
+    \item
+      Заполните табличку (V – количество вершин, E – количество ребер).
+      \vspace{-0.5cm}
+      \begin{center}
+        \begin{tabular}{|p{2.5cm}|p{4cm}|p{4cm}|p{4cm}|}
+          \hline
+          & Алгоритм Прима & Алгоритм Прима с приоритетной очередью & Алгоритм Крускала \\
+          \hline
+          Время работы & & & \\
+          \hline
+        \end{tabular}
+      \end{center}
+
+    \item Для данного графа пометьте рёбра, которые входят во все минимальные
+    остовы (x), входят хотя бы в один минимальный остов, но не во все (y),
+    и которые не входят ни в один минимальный остов (z).
+
+    \begin{center}
+      \begin{tikzpicture}[auto,node distance=1.8cm,
+        thick,main node/.style={circle,draw,font=\sffamily\bfseries}]
+          \node[main node] (1) {g};
+          \node[main node] (2) [below of=1] {e};
+          \node[main node] (3) [below left of=1] {c};
+          \node[main node] (4) [below right of=1] {d};
+          \node[main node] (5) [below of=3] {b};
+          \node[main node] (6) [below of=4] {f};
+          \node[main node] (7) [below right of=5] {a};
+
+          \path[] (3) [] edge node [] {3} (1);
+          \path[] (1) [] edge node [] {4} (4);
+          \path[] (3) [] edge node [] {3} (2);
+          \path[] (2) [] edge node [] {2} (4);
+          \path[] (2) [] edge node [] {4} (6);
+          \path[] (3) [] edge node [] {2} (5);
+          \path[] (5) [] edge node [] {2} (6);
+          \path[] (5) [] edge node [] {2} (7);
+          \path[] (4) [] edge node [] {3} (6);
+          \path[] (6) [] edge node [] {2} (7);
+      \end{tikzpicture}
+    \end{center}
+
+    \item Предположим, что в графе есть ребра отрицательного веса со значением
+    не менее $-K$ ($K>0$). Прибавим ко всем ребрам графа положительное число $K$.
+    Теперь в графе нет ребер отрицательного веса. Можно ли применить алгоритм
+    Дейкстры к получившемуся графу, чтобы найти кратчайшие пути для исходного
+    графа? Ответ обоснуйте.
+
+    \vskip 3.5cm
+
+    \item Дана СНМ на 10 элементах, реализованная с ранговой эвристикой. Изначально все
+    вершины находятся в отдельных компонентах. Приведите такую последовательность операций
+    вида \texttt{union(a, b)}, что после их выполнения в указанном порядке поддерево с
+    корнем в $0$ будет иметь ранг $3$. Считайте, что при равенстве рангов корень второй
+    компоненты (b) подвешивается к корню первой (a).
+
+    \vskip 3.5cm
+
+    \item Примените алгоритм Форда-Беллмана к ориентированному графу, найдите расстояния
+    до всех вершин из вершины $1$, описывая текущий результат после каждой итерации.
+    Порядок ребер для рассмотрения: $(1, 2)$, $(1, 3)$, $(1, 6)$, $(2, 3)$, $(2, 4)$,
+    $(3, 4)$, $(6, 3)$, $(4, 5)$, $(5, 6)$.
+        
+      \begin{center}
+        \begin{tikzpicture}[auto,node distance=1.8cm,
+          thick,main node/.style={circle,draw,font=\sffamily\bfseries}]
+            \node[main node] (5) [] {5};
+            \node[main node] (6) [below left of=5] {6};
+            \node[main node] (3) [below of=5] {3};
+            \node[main node] (4) [below right of=5] {4};
+            \node[main node] (1) [below left of=3] {1};
+            \node[main node] (2) [below right of=3] {2};
+
+            \path[] (6) [] edge node [] {3} (5);
+            \path[] (5) [] edge node [] {1} (4);
+            \path[] (6) [] edge node [] {-3} (3);
+            \path[] (3) [] edge node [] {-2} (4);
+            \path[] (1) [] edge node [] {9} (6);
+            \path[] (3) [] edge node [] {4} (1);
+            \path[] (3) [] edge node [] {5} (2);
+            \path[] (4) [] edge node [] {10} (2);
+            \path[] (2) [] edge node [] {2} (1);
+        \end{tikzpicture}
+      \end{center}
+
+  \end{enumerate}
+\end{document}
