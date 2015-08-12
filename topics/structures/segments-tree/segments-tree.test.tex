@@ -1,0 +1,173 @@
+\documentclass[a4paper,10pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T2A]{fontenc}
+\usepackage[english,russian]{babel}
+
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{indentfirst}
+\usepackage{fancyhdr}
+\usepackage{needspace}
+\usepackage[margin=2cm]{geometry}
+\usepackage{tikz}
+\usepackage[perpage]{footmisc}
+
+\pagestyle{fancy}
+\lhead{Дерево отрезков}
+\rhead{ЛКШ.2015.Август.B.Тесты}
+
+\begin{document}
+  \section{Дерево отрезков: тест, вариант 1}
+
+  \begin{enumerate}
+    \item Нарисуйте дерево отрезков для операции
+      $\oplus$\footnote{Символом $\oplus$ обозначается побитовое исключающее ИЛИ:
+      $0 \oplus 0 = 1 \oplus 1 = 0$, $0 \oplus 1 = 1 \oplus 0 = 1$}
+      для массива двоичных чисел.
+      $$[101_2, 001_2, 111_2, 110_2, 010_2, 000_2, 001_2, 110_2]$$.
+
+      \vskip 3cm
+
+    \item Постройте разреженную таблицу для операции $\min$
+      для массива $[3, 1, 7, 2, 4]$.
+
+      \vskip 3cm
+
+    \item Для некоторого индексируемого с нуля восьмиэлементного
+      массива построено дерево отрезков (см. рисунок).
+      Поступило три запроса:
+      \begin{enumerate} 
+        \item увеличение на пять всех элементов с индексами из $[3;7)$,
+        \item уменьшение на шесть элементов с индексами из $[0;4)$,
+        \item увеличение на один всех элементов с индексами из $[4; 6)$.
+      \end{enumerate}
+
+      В кружки на рисунке впишите итоговые значения полей
+      \texttt{add}\footnote{Поле для хранения значения отложенной операции, которую еще
+      предстоит <<протолкнуть>>. Возможные названия: \texttt{add}, \texttt{delta}, \texttt{upd}}
+      для соответствующих вершин.
+
+      \begin{center}
+        \begin{tikzpicture}[level/.style={sibling distance=40mm/#1}]
+          \node [circle,draw] (1) {\vphantom{0}}
+            child {node [circle, draw] (2) {\vphantom{0}}
+              child {node [circle, draw] (4) {\vphantom{0}}
+                child {node [circle, draw] (8) {\vphantom{0}}
+                }
+                child {node [circle, draw] (9) {\vphantom{0}}
+                }
+              }
+              child {node [circle, draw] (5) {\vphantom{0}}
+                child {node [circle, draw] (10) {\vphantom{0}}
+                }
+                child {node [circle, draw] (11) {\vphantom{0}}
+                }
+              }
+            }
+            child {node [circle, draw] (3) {\vphantom{0}}
+              child {node [circle, draw] (6) {\vphantom{0}}
+                child {node [circle, draw] (12) {\vphantom{0}}
+                }
+                child {node [circle, draw] (13) {\vphantom{0}}
+                }
+              }
+              child {node [circle, draw] (7) {\vphantom{0}}
+                child {node [circle, draw] (14) {\vphantom{0}}
+                }
+                child {node [circle, draw] (15) {\vphantom{0}}
+                }
+              }
+            }
+          ;
+        \end{tikzpicture}
+      \end{center}
+
+    \item Для массива из тринадцати элементов, нумеруемого с $0$,
+      постройте дерево отрезков, пронумеруйте его вершины с единицы.
+      Разбейте полуинтервал $[3; 12)$ на минимальное число отрезков,
+      соответствующих вершинам построенного дерева отрезков,
+      и перечислите номера этих вершин.
+
+      Замечание по построению: если вершине соответствует полуинтервал
+      $\left[L;R\right)$, то он делится на $\left[L;M\right)$ и $\left[M;R\right)$,
+      где $M=\lfloor\frac{L+R}{2}\rfloor$.
+  \end{enumerate}
+  \newpage
+
+  \section{Дерево отрезков: тест, вариант 2}
+
+  \begin{enumerate}
+    \item Нарисуйте дерево отрезков для операции
+      $\oplus$\footnote{Символом $\oplus$ обозначается побитовое исключающее ИЛИ:
+      $0 \oplus 0 = 1 \oplus 1 = 0$, $0 \oplus 1 = 1 \oplus 0 = 1$}
+      для массива двоичных чисел.
+      $$[101_2, 001_2, 111_2, 110_2, 010_2, 000_2, 001_2, 110_2]$$.
+
+      \vskip 3cm
+
+    \item Постройте разреженную таблицу для операции $\min$
+      для массива $[3, 1, 7, 2, 4]$.
+
+      \vskip 3cm
+
+    \item Для некоторого индексируемого с нуля восьмиэлементного
+      массива построено дерево отрезков (см. рисунок).
+      Поступило три запроса:
+      \begin{enumerate} 
+        \item присвоить пять всем элементам с индексами из $[3;7)$,
+        \item присвоить шесть всем элементам с индексами из $[0;4)$,
+        \item присвоить один всем элементам с индексами из $[4; 6)$.
+      \end{enumerate}
+
+      В кружки на рисунке впишите итоговые значения полей
+      \texttt{upd}\footnote{Поле для хранения значения отложенной операции, которую еще
+      предстоит <<протолкнуть>>. Возможные названия: \texttt{add}, \texttt{delta}, \texttt{upd}}
+      для соответствующих вершин.
+
+      \begin{center}
+        \begin{tikzpicture}[level/.style={sibling distance=40mm/#1}]
+          \node [circle,draw] (1) {\vphantom{0}}
+            child {node [circle, draw] (2) {\vphantom{0}}
+              child {node [circle, draw] (4) {\vphantom{0}}
+                child {node [circle, draw] (8) {\vphantom{0}}
+                }
+                child {node [circle, draw] (9) {\vphantom{0}}
+                }
+              }
+              child {node [circle, draw] (5) {\vphantom{0}}
+                child {node [circle, draw] (10) {\vphantom{0}}
+                }
+                child {node [circle, draw] (11) {\vphantom{0}}
+                }
+              }
+            }
+            child {node [circle, draw] (3) {\vphantom{0}}
+              child {node [circle, draw] (6) {\vphantom{0}}
+                child {node [circle, draw] (12) {\vphantom{0}}
+                }
+                child {node [circle, draw] (13) {\vphantom{0}}
+                }
+              }
+              child {node [circle, draw] (7) {\vphantom{0}}
+                child {node [circle, draw] (14) {\vphantom{0}}
+                }
+                child {node [circle, draw] (15) {\vphantom{0}}
+                }
+              }
+            }
+          ;
+        \end{tikzpicture}
+      \end{center}
+
+    \item Для массива из тринадцати элементов, нумеруемого с $0$,
+      постройте дерево отрезков, пронумеруйте его вершины с единицы.
+      Разбейте полуинтервал $[3; 12)$ на минимальное число отрезков,
+      соответствующих вершинам построенного дерева отрезков,
+      и перечислите номера этих вершин.
+
+      Замечание по построению: если вершине соответствует полуинтервал
+      $\left[L;R\right)$, то он делится на $\left[L;M\right)$ и $\left[M;R\right)$,
+      где $M=\lfloor\frac{L+R}{2}\rfloor$.
+  \end{enumerate}
+\end{document}

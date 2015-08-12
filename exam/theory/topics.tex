@@ -1,0 +1,173 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T2A]{fontenc}
+\usepackage[english,russian]{babel}
+
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{indentfirst}
+\usepackage{fancyhdr}
+\usepackage{needspace}
+
+\pagestyle{fancy}
+\lhead{Зачет}
+\rhead{ЛКШ.B}
+\rfoot{2015, август}
+
+\begin{document}
+  \section{Графы}
+
+    \subsection{Поиск в глубину}
+
+      \subsubsection{Понятия и алгоритм}
+        \begin{enumerate}
+          \item Поиск (обход) графа
+          \item Основной алгоритм
+          \item Метки посещения
+          \item Дерево обхода
+          \item Классификация рёбер
+          \item Время входа и выхода
+          \item Метки трёх цветов
+        \end{enumerate}
+
+      \subsubsection{Применения}
+        \begin{enumerate}
+          \item Проверка на предка
+          \item Компоненты связности
+          \item Поиск циклов
+          \item Топологическая сортировка
+          \item Раскраска графа в два цвета
+          \item Компоненты сильной связности
+          \item Мосты
+          \item Точки сочленения
+          \item Компоненты двусвязности
+          \item * Эйлеров цикл
+          \item * Максимальное паросочетание в двудольном графе
+          \item * Наименьший общий предок
+        \end{enumerate}
+ 
+    \subsection{Остовы}
+      \begin{enumerate}
+        \item Определение
+        \item Лемма о разрезе
+        \item Алгоритм Прима
+        \item Алгоритм Краскала
+      \end{enumerate}
+
+    \subsection{Кратчайшие пути}
+      \begin{enumerate}
+        \item Алгоритм Дейкстры
+        \item Алгоритм Дейкстры с приоритетной очередью
+        \item Алгоритм Форда-Беллмана
+        \item Нахождение кратчайшего пути с учетом отрицательных циклов
+        \item Алгоритм Флойда
+        \item Восстановление пути
+        \item Поиск в ширину для графов с весами $\{0, 1\}$, ${0, \ldots, k}$
+      \end{enumerate}
+
+  \section{Структуры данных}
+
+    \subsection{Дерево отрезков}
+      \begin{enumerate}
+        \item RMQ, RSQ, решения offline
+        \item Общая концепция дерева отрезков
+        \item Операция обновления элемента
+        \item Операция запроса на отрезке
+        \item Детали реализации
+        \item Групповые операции
+        \item Операция изменения на отрезке
+      \end{enumerate}
+
+    \subsection{Разреженные таблицы}
+
+    \subsection{СНМ}
+      \begin{enumerate}
+        \item Ранговая эвристика
+        \item Эвристика переподвешивания к корню
+      \end{enumerate}
+
+    \subsection{Декартово дерево}
+      \begin{enumerate}
+        \item Определение BST
+        \item Операции в BST: поиск, вставка, удаление
+        \item Операции в декартовом дереве
+        \item Указатели
+        \item Реализация
+        \item Хранение размеров поддеревьев
+        \item $k$-я статистика
+        \item Запросы на отрезке значений: \texttt{count}, \texttt{sum}
+        \item Групповые операции
+        \item Неявный ключ
+        \item Хранение массива в декартовом дереве, разрезания, обращения по индексу
+        \item Групповые обновления: \texttt{add}, \texttt{reverse}
+      \end{enumerate}
+
+  \section{Динамическое программирование}
+    \begin{enumerate}
+      \item Общие принципы
+      \item ДП на префиксах
+        \begin{enumerate}
+          \item Кратчайший путь в ациклическом графе
+          \item Наибольшая возрастающая подпоследовательность
+          \item Наибольшая общая подпоследовательность
+        \end{enumerate}
+      \item ДП по цифрам числа
+        \begin{enumerate}
+          \item Количество чисел от $0$ до $n$ с суммой цифр $k$
+        \end{enumerate}
+      \item ДП на подотрезках
+        \begin{enumerate}
+          \item Наибольшая подпоследовательность-палиндром
+          \item Триангуляция многоугольника с максимальной суммой сторон
+        \end{enumerate}
+      \item ДП на поддеревьях
+        \begin{enumerate}
+          \item Взвешенное паросочетание в дереве
+          \item Выделение поддерева размера $k$ с минимальныи количеством отрезанных ребер
+          \item Задача о количестве вершин на расстоянии $k$ для каждой вершины
+        \end{enumerate}
+      \item ДП на подмножествах
+        \begin{enumerate}
+          \item Гамильтонов путь, цикл
+          \item Минимальное число цветов, в которое можно раскрасить граф, перебор подмасок за $3^n$
+        \end{enumerate}
+      \item ДП по профилю
+        \begin{enumerate}
+          \item Замощение доминошками
+        \end{enumerate}
+    \end{enumerate}
+
+  \section{Геометрия}
+
+  \section{Строки}
+    \begin{enumerate}
+      \item Префикс-функция, алгоритм Кнута-Морриса-Пратта
+      \item Z-функция
+      \item Полиномиальный хеш
+        \begin{enumerate}
+          \item Реализация
+          \item Сравнение строк
+          \item Максимальный подпалиндром
+        \end{enumerate}
+      \item Бор
+        \begin{enumerate}
+          \item Реализация
+          \item Сортировка
+          \item Число различных подстрок
+          \item Беспрефиксность кода
+        \end{enumerate}
+    \end{enumerate}
+
+  \section{Комбинаторика}
+    \begin{enumerate}
+      \item Формулы для перестановок и сочетаний
+      \item Связь сочетаний с биномом
+      \item Динамика для подсчёта объектов
+      \item Рекурсивная генерация комбинаторных объектов 
+      \item Получение объекта по номеру 
+      \item Получение номера по объекту 
+      \item Генерация следующий/предыдущий
+    \end{enumerate}
+
+\end{document}
