@@ -1,0 +1,137 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T2A]{fontenc}
+\usepackage[english,russian]{babel}
+
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{indentfirst}
+\usepackage{fancyhdr}
+\usepackage{needspace}
+\usepackage{listings}
+\usepackage{tikz}
+
+\renewcommand{\le}{\leqslant}
+\newcommand{\ora}{\overrightarrow}
+\def\v{\vec}
+\def\vv{\ora}
+
+\pagestyle{fancy}
+\lhead{Геометрия: \textrm{I}~часть}
+\rhead{ЛКШ.2015.Июль.B}
+
+\usepackage{amsmath, amssymb}
+\DeclareMathOperator{\pr}{pr}
+
+\begin{document}
+\setcounter{tocdepth}{7}
+%\renewcommand\cftchapafterpnum{\vskip{10pt}}
+%\renewcommand\cftsecafterpnum{\vskip{15pt}}
+\tableofcontents
+\newpage
+
+  \section{Точками на плоскости в координатах}
+    \subsection{Точки, вектора и радиус-вектора}
+
+    Точка на плоскости задаётся двумя координатами $(x, y)$.
+
+    Если нарисовать стрелочку из начала координат $O(0, 0)$ в точку $A(x, y)$, то получится \emph{радиус-вектор} $\vv{OA}$ с координатами $(x, y)$.
+    
+    По теореме Пифагора, длина такого вектора будет равна
+    \[|\vv{OA}| = \sqrt{x^2 + y^2}.\]
+    
+    Рассмотрим вектор $\vv{AB}$ из $A(x_a, y_a)$ в точку $B(x_b, y_b)$.
+    Если отложить его от начала координат, то получившийся радиус-вектор будет иметь координаты $(x_b - x_a,\ y_b - y_a)$. В векторном виде: $\vv{AB} = \vv{OB} - \vv{OA}$.
+    
+      \begin{tikzpicture}[shorten >=1pt,->]
+        \coordinate (O) at (0, 0) node[left]  at (O) {$O$};
+        \coordinate (B) at (2, 2) node[above] at (B) {$B$};
+        \coordinate (A) at (3, 1) node[right] at (A) {$A$};
+        \draw (O) -- (B);
+        \draw (O) -- (A);
+        \draw (A) -- (B);
+      \end{tikzpicture}
+
+    Вектор с координатами $(0, 0)$, то есть вектор с совпадающими началом и концом, называется \emph{нуль-вектором} и обозначается $\v 0$.
+    
+    В программе мы можем описывать все точки радиус-векторами, например, точку $A(x, y)$ мы заменим вектором \[\v a = \vv{OA} = (x, y).\] Таким образом, в вычислительной геометрии  понятие <<точка>> нам вообще не нужно.
+    
+    \subsection{Сумма, разность векторов, умножение на число}
+    
+    Сумма и разность вычисляются покоординатно $\v a \pm \v b = (x_a \pm x_b, y_a \pm y_b)$.
+    
+    Геометрически это соответствует правилам сложения векторов <<треугольника>> и <<параллелограмма>>.
+
+    \begin{minipage}{0.4\textwidth}
+      \begin{tikzpicture}[shorten >=1pt,->]
+        \coordinate (A) at (0, 0);
+        \coordinate (B) at (2, 2);
+        \coordinate (C) at (3, 1);
+
+        \draw[very thick] (A) -- node[above left] {$\v a$} (B);
+        \draw[very thick] (B) -- node[above right] {$\v b$} (C);
+        \draw[thick,red] (A) -- node[below right] {$\v a + \v b$} (C);
+      \end{tikzpicture}
+    \end{minipage}
+    \begin{minipage}{0.4\textwidth}
+      \begin{tikzpicture}[shorten >=1pt,->]
+        \coordinate (A) at (0, 0);
+        \coordinate (B) at (2, 2);
+        \coordinate (C) at (3, 1);
+        \coordinate (D) at (1, -1);
+
+        \draw[very thick] (A) -- node[above left] {$\v a$} (B);
+        \draw (B) -- node[above right] {$\v b$} (C);
+        \draw[thick, red] (A) -- node[below] {\scriptsize $\v a + \v b$} (C);
+        \draw[very thick] (A) -- node[below left] {$\v b$} (D);
+        \draw (D) -- node[below right] {$\v a$} (C);
+      \end{tikzpicture}
+    \end{minipage}
+    
+    \subsection{Проекция}
+    Проецировать вектора можно только на ненулевые вектора.
+      
+    Проекцией вектора $\vv{OA}$ на вектор $\vv{OB}$ называется длина $|OH|$, взятая со знаком <<$+$>> или <<$-$>> в зависимости от того на луче основание перпендикуляра $H$ или на продолжении луча. $\text{pr}_{\scriptsize \vv{OB}} \vv{OA} = \pm |OH|$.
+
+      \begin{tikzpicture}[shorten >=1pt,->]
+        \coordinate (O) at (0, 0) node[below] at (O) {$O$};
+        \coordinate (A) at (3, 2) node[above] at (A) {$A$};
+        \coordinate (B) at (5, 0) node[below] at (B) {$B$};
+        \coordinate (H) at (3, 0) node[below] at (H) {$H$};
+        \draw (O) -- (B);
+        \draw (O) -- (A);
+        \draw[dashed,-] (A) -- (H);
+      \end{tikzpicture}
+
+    \subsection{Скалярное произведение: *}
+      \emph{Скалярным произведением} называется
+      $\v a \cdot \v b = |\v a|\pr_{\v a} \v b$
+    \subsection{Косое (псевдоскалярное) произведение: \%}
+      \subsubsection{Определение через скалярное произведение}
+      \subsubsection{Почему \%, а не $\ \widehat{}\ $ или что-то ещё}
+    \subsection{Угол между векторами (atan2)}
+      \subsubsection{$\sin$ и $\cos$ на пальцах}
+      \subsubsection{Операции *, \% через тригонометрические функции}
+   \section{Структура \texttt{Vec}, перегрузка операторов.\\ \texttt{explicit} конструктор}
+   
+   \section{Прямая}
+     \subsection{Задание через точку и направляющий вектор}
+     \subsection{Задание через точку и нормаль}
+       \subsubsection{Формула}
+       \subsubsection{Построение параллельной/перпендикулярной к данной прямой через данную точку}
+     \subsection{Переход к уравнению $ax + by + c = 0$ и обратно}
+       \subsubsection{Ближайшая к началу координат точка на прямой}
+     \subsection{Расстояние со знаком от точки до прямой в длинах нормалей}
+     \subsection{Основание перпендикуляра из точки на прямую}
+     \subsection{Нормализуйте прямую почаще! Точность наше всё}
+   \section{Пересечение отрезков}
+     \subsection{$t_1 = \tfrac{(\v b - \v a)\ \%\ \v{d_2}}{\v{d_1}\ \%\ \v{d_2}}$}
+     \subsection{Сведение случая коллинеарных прямых к одномерному случаю (перегрузка оператора <)}
+   \section{Многоугольники}
+     \subsection{Площадь многоугольника}
+       \subsubsection{Через трапеции (строго)}
+       \subsubsection{Переход к формуле через треугольники}
+     \subsection{Проверка выпуклости}
+     \subsection{Проверка принадлежности точки многоугольнику (горизонтальные лучи вправо)}
+\end{document}

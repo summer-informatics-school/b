@@ -4,11 +4,18 @@
 \usepackage[T2A]{fontenc}
 \usepackage[english,russian]{babel}
 
+\usepackage{geometry}
+\geometry{a4paper}
+\geometry{margin=2cm}
+\setlength{\columnsep}{1cm}
+
 \usepackage{graphicx}
 \usepackage{color}
 \usepackage{indentfirst}
 \usepackage{fancyhdr}
 \usepackage{needspace}
+\usepackage{paralist}
+\usepackage{multicol}
 
 \pagestyle{fancy}
 \lhead{Зачет}
@@ -16,12 +23,13 @@
 \rfoot{2015, август}
 
 \begin{document}
+\begin{multicols}{2}
   \section{Графы}
 
     \subsection{Поиск в глубину}
 
       \subsubsection{Понятия и алгоритм}
-        \begin{enumerate}
+        \begin{compactenum}
           \item Поиск (обход) графа
           \item Основной алгоритм
           \item Метки посещения
@@ -29,10 +37,10 @@
           \item Классификация рёбер
           \item Время входа и выхода
           \item Метки трёх цветов
-        \end{enumerate}
+        \end{compactenum}
 
       \subsubsection{Применения}
-        \begin{enumerate}
+        \begin{compactenum}
           \item Проверка на предка
           \item Компоненты связности
           \item Поиск циклов
@@ -42,21 +50,18 @@
           \item Мосты
           \item Точки сочленения
           \item Компоненты двусвязности
-          \item * Эйлеров цикл
-          \item * Максимальное паросочетание в двудольном графе
-          \item * Наименьший общий предок
-        \end{enumerate}
+        \end{compactenum}
  
     \subsection{Остовы}
-      \begin{enumerate}
+      \begin{compactenum}
         \item Определение
         \item Лемма о разрезе
         \item Алгоритм Прима
         \item Алгоритм Краскала
-      \end{enumerate}
+      \end{compactenum}
 
     \subsection{Кратчайшие пути}
-      \begin{enumerate}
+      \begin{compactenum}
         \item Алгоритм Дейкстры
         \item Алгоритм Дейкстры с приоритетной очередью
         \item Алгоритм Форда-Беллмана
@@ -64,12 +69,12 @@
         \item Алгоритм Флойда
         \item Восстановление пути
         \item Поиск в ширину для графов с весами $\{0, 1\}$, ${0, \ldots, k}$
-      \end{enumerate}
+      \end{compactenum}
 
   \section{Структуры данных}
 
     \subsection{Дерево отрезков}
-      \begin{enumerate}
+      \begin{compactenum}
         \item RMQ, RSQ, решения offline
         \item Общая концепция дерева отрезков
         \item Операция обновления элемента
@@ -77,18 +82,18 @@
         \item Детали реализации
         \item Групповые операции
         \item Операция изменения на отрезке
-      \end{enumerate}
+      \end{compactenum}
 
     \subsection{Разреженные таблицы}
 
     \subsection{СНМ}
-      \begin{enumerate}
+      \begin{compactenum}
         \item Ранговая эвристика
         \item Эвристика переподвешивания к корню
-      \end{enumerate}
+      \end{compactenum}
 
     \subsection{Декартово дерево}
-      \begin{enumerate}
+      \begin{compactenum}
         \item Определение BST
         \item Операции в BST: поиск, вставка, удаление
         \item Операции в декартовом дереве
@@ -101,66 +106,123 @@
         \item Неявный ключ
         \item Хранение массива в декартовом дереве, разрезания, обращения по индексу
         \item Групповые обновления: \texttt{add}, \texttt{reverse}
-      \end{enumerate}
+      \end{compactenum}
 
   \section{Динамическое программирование}
-    \begin{enumerate}
+    \begin{compactenum}
       \item Общие принципы
       \item ДП на префиксах
-        \begin{enumerate}
+        \begin{compactenum}
           \item Кратчайший путь в ациклическом графе
           \item Наибольшая возрастающая подпоследовательность
           \item Наибольшая общая подпоследовательность
-        \end{enumerate}
+        \end{compactenum}
       \item ДП по цифрам числа
-        \begin{enumerate}
+        \begin{compactenum}
           \item Количество чисел от $0$ до $n$ с суммой цифр $k$
-        \end{enumerate}
+        \end{compactenum}
       \item ДП на подотрезках
-        \begin{enumerate}
+        \begin{compactenum}
           \item Наибольшая подпоследовательность-палиндром
-          \item Триангуляция многоугольника с максимальной суммой сторон
-        \end{enumerate}
+        \end{compactenum}
       \item ДП на поддеревьях
-        \begin{enumerate}
+        \begin{compactenum}
           \item Взвешенное паросочетание в дереве
           \item Выделение поддерева размера $k$ с минимальныи количеством отрезанных ребер
-          \item Задача о количестве вершин на расстоянии $k$ для каждой вершины
-        \end{enumerate}
+        \end{compactenum}
       \item ДП на подмножествах
-        \begin{enumerate}
+        \begin{compactenum}
           \item Гамильтонов путь, цикл
           \item Минимальное число цветов, в которое можно раскрасить граф, перебор подмасок за $3^n$
-        \end{enumerate}
+        \end{compactenum}
       \item ДП по профилю
-        \begin{enumerate}
+        \begin{compactenum}
           \item Замощение доминошками
-        \end{enumerate}
-    \end{enumerate}
+        \end{compactenum}
+    \end{compactenum}
 
   \section{Геометрия}
+    \begin{compactenum}
+
+    \item{Точками на плоскости в координатах}
+    \begin{compactenum}
+      \item{Точки, вектора и радиус-вектора}
+      \item{Сложение, вычитание, умнажение на число}
+      \item{Проекция вектора на вектор}
+      \item{Операции с векторами: скалярное и косое произведение}
+      \item{Угол между векторами (atan2)}
+    \end{compactenum}
+
+    \item{Структура \texttt{Vec}, перегрузка операторов.\\ \texttt{explicit} конструктор}
+     
+    \item{Прямая}
+    \begin{compactenum}
+      \item{Задание через точку и направляющий вектор, через точку и нормаль}
+      \begin{compactenum}
+        \item{Формула}
+        \item{Построение параллельной/перпендикулярной к данной прямой через данную точку}
+      \end{compactenum}
+      \item{Расстояние со знаком от точки до прямой, основание перпендикуляра}
+    \end{compactenum}
+
+    \item{Пересечение отрезков в векторной параметрической форме, 3 случая}
+
+    \item{Многоугольники}
+    \begin{compactenum}
+      \item{Площадь многоугольника}
+      \begin{compactenum}
+        \item{Через трапеции (строго)}
+        \item{Переход к формуле через треугольники}
+      \end{compactenum}
+
+      \item{Проверка принадлежности точки многоугольнику}
+      \begin{compactenum}
+        \item{Общий случай, $O(n)$}
+        \item{Выпуклый многоугольник, $O(\log n)$}
+      \end{compactenum}
+
+      \item{Выпуклая оболочка}
+    \end{compactenum}
+
+    \item{Окружности}
+      \begin{compactenum}
+        \item{Пересечение прямой и окужности}
+        \item{Пересечение двух окужностей}
+        \item{Касательная к окружности из точки}
+        \begin{compactenum}
+          \item{Количество касательных в зависимости от положения}
+          \item{Построение}
+        \end{compactenum}
+
+      \item{Общая касательная к двум окружностям}
+        \begin{compactenum}
+          \item{Количество касательных, внутренние и внешние касательные}
+          \item{Построение (сжатие, расжатие окружностей)}
+        \end{compactenum}
+      \end{compactenum}
+    \end{compactenum}
 
   \section{Строки}
-    \begin{enumerate}
+    \begin{compactenum}
       \item Префикс-функция, алгоритм Кнута-Морриса-Пратта
       \item Z-функция
       \item Полиномиальный хеш
-        \begin{enumerate}
+        \begin{compactenum}
           \item Реализация
           \item Сравнение строк
           \item Максимальный подпалиндром
-        \end{enumerate}
+        \end{compactenum}
       \item Бор
-        \begin{enumerate}
+        \begin{compactenum}
           \item Реализация
           \item Сортировка
           \item Число различных подстрок
           \item Беспрефиксность кода
-        \end{enumerate}
-    \end{enumerate}
+        \end{compactenum}
+    \end{compactenum}
 
   \section{Комбинаторика}
-    \begin{enumerate}
+    \begin{compactenum}
       \item Формулы для перестановок и сочетаний
       \item Связь сочетаний с биномом
       \item Динамика для подсчёта объектов
@@ -168,6 +230,6 @@
       \item Получение объекта по номеру 
       \item Получение номера по объекту 
       \item Генерация следующий/предыдущий
-    \end{enumerate}
-
+    \end{compactenum}
+\end{multicols}
 \end{document}
