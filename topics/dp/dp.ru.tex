@@ -13,6 +13,8 @@
 \usepackage{amssymb}
 \usepackage{color}
 \usepackage{tikz}
+\usepackage{comment}
+
 \usetikzlibrary{arrows}
 
 
@@ -87,10 +89,10 @@
       кратчайшего пути от $v$ до $u$).
       
       Топологически отсортируем граф. Массив topsort - перестановка 
-      вершин такая, что если если есть ребро $v\rightarrow u$ то $u$ 
+      вершин такая, что если если есть ребро $v\rightarrow u$, то $u$ 
       идет в topsort раньше, чем $v$. Найдем в этом массиве вершину $t$. 
       Из вершин, идущих в topsort раньше, t недостижима. Поэтому 
-      для всех вершин $v$ идущих раньше $t \operatorname{dist}[v] = +\infty$, а 
+      для всех вершин $v$, идущих раньше $t, \operatorname{dist}[v] = +\infty$, а 
       $\operatorname{dist}[t]$, очевидно, $0$.
       
       Будем считать $\operatorname{dist}[v]$ динамикой по префиксу 
@@ -131,6 +133,7 @@
       \end{lstlisting}
       
       Разберемся, что тут происходит.
+      \\
       
       \textbf{Утверждение:} dfs($v$) возвращает корректное кратчайшее 
       расстояние от $v$ до $t$.
@@ -183,6 +186,7 @@
 	  
 	  При реализации алгоритма не забывайте, что $\infty + weight = \infty$
 	  даже при отрицательных $weight$
+
       \subsubsection{НВП}
 
       \subsubsection{НОП}
@@ -190,6 +194,8 @@
     \subsection{ДП по цифрам числа}
 
       \subsubsection{Количество чисел от 0 до n с суммой цифр k}
+      \textbf{Условие.} Дано число $N$ длины $n$ и $k$. Нужно посчитать 
+      количество чисел от $0$ до $N$ 
     
     \subsection{ДП на подотрезках}
 
@@ -284,7 +290,7 @@
     
               for u in g[v]:
                   dfs(u)
-                  for i in range(1, len(size[v]) + 1):
+                  for i in range(len(size[v]), 0, -1):
                       for j in range(1, len(size[u]) + 1):
                           dp[v][i + j] = min(dp[v][i + j], dp[u][j] + dp[v][i] - 1) 
                       size[v] += size[u]       
