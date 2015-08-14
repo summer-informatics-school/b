@@ -1,0 +1,50 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T2A]{fontenc}
+\usepackage[english,russian]{babel}
+
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{indentfirst}
+\usepackage{fancyhdr}
+\usepackage{needspace}
+\usepackage{listings}
+\usepackage{tikz}
+
+\renewcommand{\le}{\leqslant}
+\newcommand{\ora}{\overrightarrow}
+\def\v{\vec}
+\def\vv{\ora}
+
+\pagestyle{fancy}
+\lhead{Геометрия: \textrm{II}~часть}
+\rhead{ЛКШ.2015.Июль.B}
+
+\usepackage{amsmath, amssymb}
+\DeclareMathOperator{\pr}{pr}
+
+\begin{document}
+\setcounter{tocdepth}{7}
+%\renewcommand\cftchapafterpnum{\vskip{10pt}}
+%\renewcommand\cftsecafterpnum{\vskip{15pt}}
+\tableofcontents
+\newpage
+
+  \section{Многоугольники}
+    \subsection{Площадь многоугольника}
+    \subsection{Проверка принадлежности точки многоугольнику}
+      \subsubsection{Общий случай, $O(n)$}
+      \subsubsection{Выпуклый многоугольник, $O(\log n)$}
+    \subsection{Выпуклая оболочка}
+  \section{Окружности}
+    \subsection{Пересечение прямой и окужности}
+    \subsection{Пересечение двух окужностей}
+    \subsection{Касательная к окружности из точки}
+      \subsubsection{Количество касательных в зависимости от положения}
+      \subsubsection{Построение}
+    \subsection{Общая касательная к двум окружностям}
+      \subsubsection{Количество касательных, внутренние и внешние касательные}
+      \subsubsection{Построение (сжатие, расжатие окружностей)}
+  \section{* Минимальное/максимальное расстояния в множестве точек}
+\end{document}
